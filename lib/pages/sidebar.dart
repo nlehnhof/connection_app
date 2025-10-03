@@ -3,6 +3,7 @@ import 'package:riddles/pages/home_page.dart';
 import 'package:riddles/pages/riddles_page.dart';
 import 'package:riddles/pages/sidebar_item.dart';
 import 'package:riddles/pages/jokes_page.dart';
+import 'package:riddles/pages/questions_page.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});
@@ -45,6 +46,11 @@ class Sidebar extends StatelessWidget {
                   title: "Riddles",
                   icon: Icons.extension,
                ),
+              SidebarItem(
+                destinationBuilder: () => QuestionsPage(),
+                title: "Questions",
+                icon: Icons.question_answer,
+              ),
             ].expand((item) => [
                   item,
                   const SizedBox(height: 10),
