@@ -1,4 +1,4 @@
-package com.example.riddles
+package com.nlehn.riddles
 
 import io.flutter.embedding.android.FlutterActivity
 
