@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flip_card/flip_card.dart';
 import 'package:riddles/pages/sidebar.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class RiddlePage extends StatefulWidget {
   const RiddlePage({super.key});
@@ -26,9 +27,10 @@ class RiddlePageState extends State<RiddlePage> {
     if (_isLoading) return; // prevent double fetch
     _isLoading = true;
 
+    final baseURL = dotenv.env['RIDDLES_API_URL']!;
     try {
       final response = await http.get(
-        Uri.parse("http://10.0.2.2:8000/riddles"),
+        Uri.parse("$baseURL/riddles"),
         // Uri.parse("http://127.0.0.1:8000/riddles"), // change to your API URL
       );
 

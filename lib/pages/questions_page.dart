@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flip_card/flip_card.dart';
 import 'package:riddles/pages/sidebar.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // ---------------------
 // Question Model + API
@@ -24,7 +25,8 @@ class Question {
 class QuestionsApi {
   final String baseUrl;
 
-  QuestionsApi({this.baseUrl = "http://10.0.2.2:8000"}); // Replace with your PC LAN IP
+  QuestionsApi({String? baseUrl})
+      : baseUrl = baseUrl ?? dotenv.env['QUESTIONS_API_URL']!;
 
   Future<List<Question>> getQuestions(String level, {int count = 5}) async {
     final response = await http.get(Uri.parse("$baseUrl/questions/$level?count=$count"));
