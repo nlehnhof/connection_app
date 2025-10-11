@@ -1,0 +1,4 @@
+{
+  "QUESTIONS_API_URL": "https://questions-api-h4ev.onrender.com",
+  "RIDDLES_API_URL": "https://riddle-api-srm2.onrender.com"
+}

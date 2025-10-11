@@ -1,9 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:flip_card/flip_card.dart';
 import 'package:riddles/pages/sidebar.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:riddles/config.dart';
 
 class RiddlePage extends StatefulWidget {
   const RiddlePage({super.key});
@@ -13,32 +13,34 @@ class RiddlePage extends StatefulWidget {
 }
 
 class RiddlePageState extends State<RiddlePage> {
+  late final String baseUrl;
   final PageController _controller = PageController();
   List<Map<String, String>> riddles = [];
   bool _isLoading = false;
+  bool _isInitialized = false;
 
   @override
   void initState() {
     super.initState();
-    _fetchNewRiddles(); // Load first batch
+    _initialize();
+  }
+
+  Future<void> _initialize() async {
+    baseUrl = Config.RIDDLES_API_URL;
+    setState(() => _isInitialized = true);
+    _fetchNewRiddles();
   }
 
   Future<void> _fetchNewRiddles() async {
-    if (_isLoading) return; // prevent double fetch
+    if (_isLoading) return;
     _isLoading = true;
 
-    final baseURL = dotenv.env['RIDDLES_API_URL']!;
     try {
-      final response = await http.get(
-        Uri.parse("$baseURL/riddles"),
-        // Uri.parse("http://127.0.0.1:8000/riddles"), // change to your API URL
-      );
-
+      final response = await http.get(Uri.parse("$baseUrl/riddles"));
       if (response.statusCode == 200) {
         final List data = json.decode(response.body);
-
         setState(() {
-          data.shuffle(); // randomize
+          data.shuffle();
           for (var riddle in data.take(5)) {
             riddles.add({
               "question": riddle["question"] ?? "No question found",
@@ -68,6 +70,12 @@ class RiddlePageState extends State<RiddlePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!_isInitialized) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator(color: Colors.white)),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.red,
       appBar: AppBar(
@@ -95,11 +103,10 @@ class RiddlePageState extends State<RiddlePage> {
       ),
       endDrawer: Sidebar(),
       body: riddles.isEmpty
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator(color: Colors.white))
           : PageView.builder(
               controller: _controller,
               onPageChanged: (index) {
-                // Fetch more riddles when near the end
                 if (index >= riddles.length - 2) {
                   _fetchNewRiddles();
                 }

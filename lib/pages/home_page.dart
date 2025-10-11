@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center, // horizontal centering
               children: [
                 Text(
-                  'Welcome to your...',
+                  'Welcome to...',
                   textAlign: TextAlign.center, // ensures text is centered horizontally
                   style: TextStyle(
                     fontSize: 28,
@@ -56,26 +56,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20), // vertical spacing
-                Text(
-                  'Center',
-                  textAlign: TextAlign.center, // ensures text is centered horizontally
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-                Text(
-                  'For',
-                  textAlign: TextAlign.center, // ensures text is centered horizontally
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
                 Text(
                   'Connection',
                   textAlign: TextAlign.center, // ensures text is centered horizontally

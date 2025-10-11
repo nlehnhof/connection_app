@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:riddles/pages/splashscreen.dart';
-import 'package:riddles/pages/home_page.dart';
+import 'package:riddles/pages/splashscreen.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Important for async
-  // await dotenv.load(fileName: ".env");
+void main() {
   runApp(const MyApp());
 }
 
@@ -16,8 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Joke App',
-      home: HomePage(),
+      title: 'Riddles App',
+      home: const SplashScreen(),
     );
   }
 }
