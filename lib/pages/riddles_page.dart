@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flip_card/flip_card.dart';
+import 'package:riddles/pages/sidebar.dart';
 
 class RiddlePage extends StatefulWidget {
   const RiddlePage({super.key});
@@ -66,16 +67,31 @@ class RiddlePageState extends State<RiddlePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 251, 73, 73),
+      backgroundColor: Colors.red,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.red,
         title: const Text(
           "Swipe for Riddles",
           style: TextStyle(
-              color: Colors.white, fontStyle: FontStyle.italic, fontSize: 28),
+            color: Colors.white,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        backgroundColor: const Color.fromARGB(255, 251, 73, 73),
+        centerTitle: true,
+        elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(Icons.menu, color: Colors.white),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+            ),
+          ),
+        ],
       ),
+      endDrawer: Sidebar(),
       body: riddles.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : PageView.builder(

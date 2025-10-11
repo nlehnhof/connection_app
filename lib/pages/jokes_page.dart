@@ -64,7 +64,7 @@ class JokePageState extends State<JokePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 251, 73, 73),
+      backgroundColor: Colors.red,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
@@ -82,7 +82,7 @@ class JokePageState extends State<JokePage> {
         actions: [
           Builder(
             builder: (context) => IconButton(
-              icon: const Icon(Icons.menu, color: Colors.black),
+              icon: const Icon(Icons.menu, color: Colors.white),
               onPressed: () => Scaffold.of(context).openEndDrawer(),
             ),
           ),
